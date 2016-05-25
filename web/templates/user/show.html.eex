@@ -1,0 +1,33 @@
+<h2>Show user</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </li>
+
+  <li>
+    <strong>Twitter handle:</strong>
+    <%= @user.twitter_handle %>
+  </li>
+
+  <li>
+    <strong>Twitter:</strong>
+    <%= @user.twitter_id %>
+  </li>
+
+  <li>
+    <strong>Twitter access token:</strong>
+    <%= @user.twitter_access_token %>
+  </li>
+
+  <li>
+    <strong>Twitter access secret:</strong>
+    <%= @user.twitter_access_secret %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: user_path(@conn, :edit, @user) %>
+<%= link "Back", to: user_path(@conn, :index) %>
