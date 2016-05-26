@@ -19,7 +19,7 @@ defmodule Marco.Mixfile do
   def application do
     [mod: {Marco, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ueberauth_twitter]]
+                    :phoenix_ecto, :postgrex, :ueberauth_twitter, :extwitter, :timex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,7 +39,9 @@ defmodule Marco.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:ueberauth_twitter, "~> 0.2"},
-     {:oauth, github: "tim/erlang-oauth"}]
+     {:oauth, github: "tim/erlang-oauth"},
+     {:extwitter, "~> 0.7.1"},
+     {:timex, "~> 2.1.5"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

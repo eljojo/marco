@@ -37,7 +37,6 @@ defmodule Marco.AuthController do
   end
 
   defp find_or_create_user(params) do
-    IO.puts inspect(params)
     user = Repo.get_by(User, twitter_id: params.twitter_id) || %User{}
     changeset = User.changeset(user, params)
     Repo.insert_or_update(changeset)

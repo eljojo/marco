@@ -10,6 +10,8 @@ defmodule Marco.User do
     field :twitter_avatar, :string
 
     timestamps
+
+    has_many :tweets, Marco.Tweet
   end
 
   @doc """
