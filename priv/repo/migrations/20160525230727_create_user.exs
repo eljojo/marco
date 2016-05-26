@@ -8,9 +8,11 @@ defmodule Marco.Repo.Migrations.CreateUser do
       add :twitter_id, :bigint
       add :twitter_access_token, :string
       add :twitter_access_secret, :string
+      add :twitter_avatar, :string
 
       timestamps
     end
 
+    create index(:users, [:twitter_id])
   end
 end
