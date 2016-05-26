@@ -42,11 +42,12 @@ defmodule Marco.TweetImporter do
   end
 
   defp setup_credentials_for_user(user) do
-    ExTwitter.configure(
-      :process,
+    app_credentials = Application.get_env(:extwitter, :oauth, %{})
+    user_credentials = %{
       access_token: user.twitter_access_token,
       access_token_secret: user.twitter_access_secret
-    )
+    }
+    ExTwitter.configure(:process, Map.merge(app_credentials, user_credentials))
   end
 
   defp last_fetched_twitter_id(user) do

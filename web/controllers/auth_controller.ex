@@ -47,8 +47,8 @@ defmodule Marco.AuthController do
       name: auth.info.name,
       twitter_id: String.to_integer(auth.uid),
       twitter_handle: auth.info.nickname,
-      twitter_access_token: to_string(auth.credentials.secret),
-      twitter_access_secret: to_string(auth.credentials.token),
+      twitter_access_token: to_string(auth.credentials.token),
+      twitter_access_secret: to_string(auth.credentials.secret),
       twitter_avatar: auth.info.image
     }
   end
