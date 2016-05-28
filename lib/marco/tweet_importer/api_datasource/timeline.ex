@@ -1,13 +1,18 @@
 defmodule Marco.TweetImporter.ApiDatasource.Timeline do
-  alias Marco.TweetImporter.ApiDatasource
+  require Logger
 
-  import ApiDatasource, only: [
-    format_api_tweet: 1, oldest_fetched_tweet_id: 1,
-    newest_fetched_tweet_id: 1, setup_credentials_for_user: 1
-  ]
-
-  def get_tweets(user) do
-    setup_credentials_for_user(user)
-    ExTwitter.user_timeline([count: 200, max_id: oldest_fetched_tweet_id(user)]) |> Stream.map(&format_api_tweet(&1))
+  def query_api(user, opts \\ %{}) do
+    default_opts = %{count: 200}
+    options = Map.merge(default_opts, Map.new(opts))
+    Logger.debug "fetching tweets through timeline api: " <> inspect(options)
+    try do
+      tweets = ExTwitter.user_timeline(Map.to_list(options))
+      {:ok, tweets}
+    rescue
+      # https://github.com/parroty/extwitter/blob/94bcd32ccdbb1985e0e1af71c71b6dd116822c45/lib/extwitter/api/base.ex#L29
+      e in ExTwitter.ConnectionError ->
+        Logger.error "error getting tweets" <> inspect(e)
+        {:error, e}
+    end
   end
 end

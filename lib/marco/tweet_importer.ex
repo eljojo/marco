@@ -5,12 +5,8 @@ defmodule Marco.TweetImporter do
   alias Marco.TweetImporter.ApiDatasource
 
   def import_tweets(user) do
-    get_tweets_from(ApiDatasource.Search ,user)
+    ApiDatasource.get_tweets(user, :timeline)
     |> Enum.map(&persist_tweet(&1, user))
-  end
-
-  defp get_tweets_from(datasource, user) do
-    datasource.get_tweets(user)
   end
 
   defp persist_tweet(params, user) do
